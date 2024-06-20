@@ -1,4 +1,4 @@
-name: Atividade4 #push, a cada hora uma ação, utilizar uma action pré-existente e pelo menos um script
+name: Atividade 4 #push, a cada hora uma ação, utilizar uma action pré-existente e pelo menos um script
 
 on:
   push:
@@ -17,35 +17,8 @@ jobs:
     steps:
     - name: Check-out do código
       uses: actions/checkout@v2
-      
-    - name: Listar arquivos após check-out
-      run: ls -R
 
     - name: Configurar Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14.x'
-
-    - name: Limpar cache do npm
-      run: npm cache clean --force
-
-    - name: Instalar dependências
-      run: npm install
-      working-directory: /workspaces  # Defina o diretório de trabalho explícito se necessário
-
-    - name: Executar testes
-      run: npm run test
-
-    - name: Construir aplicação
-      run: npm run build
-
-    - name: Deploy para ambiente de produção
-      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
-      run: |
-        echo "Implantando no ambiente de produção..."
-        # Comandos para implantar a aplicação no ambiente de produção
-
-    - name: Rodar script personalizado
-      run: |
-        chmod +x ./scripts/test.sh
-        ./scripts/test.sh
+        node-version: '
