@@ -1,0 +1,1 @@
+echo "Olá esse é um script teste"
