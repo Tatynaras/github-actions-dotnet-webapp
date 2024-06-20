@@ -27,7 +27,7 @@ jobs:
       run: npm install
       
     - name: Executar testes
-      run: npm run test  # Corrigido para `npm run test`
+      run: npm run test
 
     - name: Construir aplicação
       run: npm run build
@@ -37,3 +37,8 @@ jobs:
       run: |
         echo "Deploying to production environment..."
         # Comandos para implantar a aplicação no ambiente de produção
+
+    - name: Rodar script personalizado
+      run: |
+        chmod +x ./scripts/test.sh  # Dá permissão de execução ao script de teste
+        ./scripts/test.sh  # Executa o script de teste
