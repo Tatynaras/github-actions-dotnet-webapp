@@ -17,8 +17,38 @@ jobs:
     steps:
     - name: Check-out do código
       uses: actions/checkout@v2
+      
+    - name: Listar arquivos após check-out
+      run: ls -R
 
     - name: Configurar Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '
+        node-version: '14.x'
+
+    - name: Limpar cache do npm
+      run: npm cache clean --force
+
+    - name: Instalar dependências
+      run: npm install
+      working-directory: /github/workspace  # Diretório padrão de trabalho após o checkout
+
+    - name: Executar testes
+      run: npm run test
+      working-directory: /github/workspace  # Diretório padrão de trabalho após o checkout
+
+    - name: Construir aplicação
+      run: npm run build
+      working-directory: /github/workspace  # Diretório padrão de trabalho após o checkout
+
+    - name: Deploy para ambiente de produção
+      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        echo "Implantando no ambiente de produção..."
+        # Comandos para implantar a aplicação no ambiente de produção
+
+    - name: Rodar script personalizado
+      run: |
+        chmod +x ./scripts/test.sh
+        ./scripts/test.sh
+      working-directory: /github/workspace  # Diretório padrão de trabalho após o checkout
