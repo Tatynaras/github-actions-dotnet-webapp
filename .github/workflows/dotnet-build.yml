@@ -1,12 +1,10 @@
-name: github-actions .NET
+name: dotnet-build.yml
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   schedule:
-    - cron: '0 0 * * 1'
+    - cron: '0 * * * 1'
 
 jobs:
   build:
@@ -25,3 +23,8 @@ jobs:
 
     - name: Build
       run: dotnet build **/*.csproj --no-restore
+
+    - name: Run custom script
+      run: |
+        chmod +x ./scripts/test.sh  # Dá permissão de execução ao script
+        ./scripts/test.sh  # Executa o script personalizado
