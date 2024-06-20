@@ -1,10 +1,10 @@
-name: dotnet-build.yml
+name: atividade4
 
 on:
   push:
     branches: [ "main" ]
   schedule:
-    - cron: '0 * * * 1'
+    - cron: '0 * * * *'
 
 jobs:
   build:
