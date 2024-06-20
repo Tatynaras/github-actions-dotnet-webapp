@@ -1,4 +1,4 @@
-name: Atividade 4 #push, a cada hora uma ação, utilizar uma action pré-existente e pelo menos um script
+name: Atividade4 #push, a cada hora uma ação, utilizar uma action pré-existente e pelo menos um script
 
 on:
   push:
