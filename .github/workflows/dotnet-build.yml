@@ -31,7 +31,7 @@ jobs:
 
     - name: Instalar dependências
       run: npm install
-      working-directory: /workspaces/atividade4  # Defina o diretório de trabalho explícito se necessário
+      working-directory: /workspaces  # Defina o diretório de trabalho explícito se necessário
 
     - name: Executar testes
       run: npm run test
