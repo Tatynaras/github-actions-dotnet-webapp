@@ -38,10 +38,6 @@ jobs:
         echo "Deploying to production environment..."
         # Comandos para implantar a aplicação no ambiente de produção
 
-    - name: Notificar resultado do build
-      if: always()
-      run: echo "Build concluído: ${{ job.status }}"
-
     - name: Rodar script
       run: |
         chmod +x ./scripts/test.sh  # Dá permissão de execução ao script de teste
