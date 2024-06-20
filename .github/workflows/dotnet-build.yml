@@ -1,54 +1,27 @@
-name: Atividade 4 #push, a cada hora uma ação, utilizar uma action pré-existente e pelo menos um script
+name: github-actions .NET
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
   schedule:
-    - cron: '0 * * * *'  # Agendado para executar a cada hora
+    - cron: '0 0 * * 1'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check-out do código
-      uses: actions/checkout@v2
-      
-    - name: Listar arquivos após check-out
-      run: ls -R
+    - uses: actions/checkout@v4
 
-    - name: Configurar Node.js
-      uses: actions/setup-node@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        node-version: '14.x'
+        dotnet-version: 8.0.x
 
-    - name: Limpar cache do npm
-      run: npm cache clean --force
+    - name: Restore dependencies
+      run: dotnet restore **/*.csproj
 
-    - name: Instalar dependências
-      run: npm install
-      working-directory: /github/workspace  # Diretório padrão de trabalho após o checkout
-
-    - name: Executar testes
-      run: npm run test
-      working-directory: /github/workspace  # Diretório padrão de trabalho após o checkout
-
-    - name: Construir aplicação
-      run: npm run build
-      working-directory: /github/workspace  # Diretório padrão de trabalho após o checkout
-
-    - name: Deploy para ambiente de produção
-      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
-      run: |
-        echo "Implantando no ambiente de produção..."
-        # Comandos para implantar a aplicação no ambiente de produção
-
-    - name: Rodar script personalizado
-      run: |
-        chmod +x ./scripts/test.sh
-        ./scripts/test.sh
-      working-directory: /github/workspace  # Diretório padrão de trabalho após o checkout
+    - name: Build
+      run: dotnet build **/*.csproj --no-restore
