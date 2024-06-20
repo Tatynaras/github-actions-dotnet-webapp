@@ -1,4 +1,4 @@
-name: atividade 4 #push, a cada hora uma ação , utilizar uma action pré existente e pelo menos um script
+name: Atividade 4 #push, a cada hora uma ação, utilizar uma action pré-existente e pelo menos um script
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
     - name: Deploy para ambiente de produção
       if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
-        echo "Deploying to production environment..."
+        echo "Implantando no ambiente de produção..."
         # Comandos para implantar a aplicação no ambiente de produção
 
     - name: Rodar script personalizado
